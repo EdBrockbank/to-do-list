@@ -26,13 +26,14 @@ function renderTickets() {
 
 //function to create a new ticket
 function newTicket() {
+    //getting the title and description and setting the completed flag to no
+    var title = $("#title").val();
+    var desc = $("#desc").val();
+    var complete = "no";
     //if the local storage is empty
     if (JSON.parse(localStorage.getItem('tickets')) === null){
-        //setting the id to 1, getting the title and description and setting the completed flag to no
+        //setting the id
         var id = 1;
-        var title = $("#title").val();
-        var desc = $("#desc").val();
-        var complete = "no";
         //setting the variable
         var item = [id,title, desc,complete];
         //setting the array of arrays
@@ -42,11 +43,8 @@ function newTicket() {
     } else {
         //getting the current list of tickets
         var list = JSON.parse(localStorage.getItem('tickets'));
-        //setting the id, getting the title and description and setting the completed flag to no
+        //setting the id
         var id = list.length + 1;
-        var title = $("#title").val();
-        var desc = $("#desc").val();
-        var complete = "no";
         //pushing the data into an array
         var item = [id,title, desc,complete];
         //pushing the array into the list of tickets
