@@ -1,0 +1,19 @@
+.ticketArea > .ticket{
+    margin: 10px 0 10px 0;
+    background-color: #EDEDED;
+    padding: 10px;
+}
+
+.title{
+
+}
+
+.desc{
+
+}
+
+.completedArea > .ticket{
+    margin: 10px 0 10px 0;
+    background-color: #7FCF67;
+    padding: 10px;
+}
