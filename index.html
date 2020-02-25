@@ -22,20 +22,28 @@
 
             </div>
             <div class="col-md-4">
-                <a class="btn btn-primary" href="newItem.html">New Item</a>
                 <button id="clear" class="btn btn-primary" type="button" onclick="clearList()">Clear List</button>
             </div>
         </div>
     </div>
     <div class="container mt-5">
         <div id="ticketArea" class="ticketArea">
-            <h2>Do Do:</h2>
-
+            <h2>To Do:</h2>
         </div>
         <hr>
         <div id="completedArea" class="completedArea">
             <h2>Completed:</h2>
-
+        </div>
+    </div>
+    <hr>
+    <div class="container-fluid text-center">
+        <div class="form-group text-center mt-5">
+            <h3>New Ticket</h3>
+            <form class="form-group" id="form">
+                <label><input id="title" class="form-control" type="text" placeholder="Title..."></label><br>
+                <label><textarea id="desc" class="form-control" type="text" placeholder="Description..." cols="50" rows="10"></textarea></label><br>
+                <button id="submit" class="btn btn-primary" type="button" onclick="newTicket()">Save</button>
+            </form>
         </div>
     </div>
 </div>
