@@ -1,7 +1,7 @@
 simple set of javascript commands
 
 -- Set Up --
-To set up, add a form page with 2 inputs and a button.
+To set up, add a form with 2 inputs and a button.
 
 2 text inputs with the ids: title and desc and then a button with the onclick attribute set to newTicket()
 
