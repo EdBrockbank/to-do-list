@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" id="background">
     <div class="container">
         <div class="row text-center mt-5">
             <div class="col-md-4">
@@ -22,6 +22,7 @@
 
             </div>
             <div class="col-md-4">
+                <button id="newTicket" class="btn btn-primary" type="button" onclick="showForm()">New Ticket</button>
                 <button id="clear" class="btn btn-primary" type="button" onclick="clearList()">Clear List</button>
             </div>
         </div>
@@ -36,15 +37,21 @@
         </div>
     </div>
     <hr>
-    <div class="container-fluid text-center">
-        <div class="form-group text-center mt-5">
-            <h3>New Ticket</h3>
-            <form class="form-group" id="form">
-                <label><input id="title" class="form-control" type="text" placeholder="Title..."></label><br>
-                <label><textarea id="desc" class="form-control" type="text" placeholder="Description..." cols="50" rows="10"></textarea></label><br>
-                <button id="submit" class="btn btn-primary" type="button" onclick="newTicket()">Save</button>
-            </form>
+</div>
+<div class="container-fluid text-center">
+    <div class="row" id="formArea">
+        <div class="col-sm-12 col-md-4"></div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group text-center mt-5">
+                <h3>New Ticket</h3>
+                <form class="form-group" id="form">
+                    <label><input id="title" class="form-control" type="text" placeholder="Title..."></label><br>
+                    <label><textarea id="desc" class="form-control" type="text" placeholder="Description..." cols="50" rows="10"></textarea></label><br>
+                    <button id="submit" class="btn btn-primary" type="button" onclick="newTicket()">Save</button>
+                </form>
+            </div>
         </div>
+        <div class="col-sm-12 col-md-4"></div>
     </div>
 </div>
 <!-- jQuery -->
@@ -55,6 +62,6 @@
 <script src="Bootstrap & Jquery/Bootstrap/js/bootstrap.js"></script>
 <script src="Bootstrap & Jquery/Bootstrap/js/bootstrap.bundle.js"></script>
 <!-- toDoList -->
-<script src="js/toDoList.js"></script>
+<script src="js/toDoListCompress.js"></script>
 </body>
 </html>

@@ -23,3 +23,14 @@
     padding: 10px;
     background-color: #F37C06;
 }
+
+#formArea{
+    position: absolute;
+    top: 3vh;
+    left: 25vw;
+    right: 25vw;
+}
+
+.grayout{
+    opacity: 0.4;
+}
