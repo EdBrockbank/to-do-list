@@ -23,14 +23,14 @@ function renderTickets() {
         tickets.forEach(function (item) {
             if (item[3] === "no") {
                 if (item[4] === "yes"){
-                    var ticket = "<div class='ticket-working'><h3 class='title'>" + item[1] + " - Working</h3><br><p class='desc'>" + item[2] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) + ")'>Stopped working on it!</button> <button class='btn btn-primary' type='button' onclick='editTicket(" + tickets.indexOf(item) + ")'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
+                    var ticket = "<div class='ticket-working'><h3 class='title'>" + item[1] + " - Working</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) + ")'>Stopped working on it!</button> <button class='btn btn-primary' type='button' onclick='editTicket(" + tickets.indexOf(item) + ")'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
                     $("#ticketArea").append(ticket);
                 } else if (item[4] === "no"){
-                    var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) +")'>Working On It!</button> <button class='btn btn-primary' type='button' onclick='editTicket( " + tickets.indexOf(item) + " )'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
+                    var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) +")'>Working On It!</button> <button class='btn btn-primary' type='button' onclick='editTicket( " + tickets.indexOf(item) + " )'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
                     $("#ticketArea").append(ticket);
                 }
             } else {
-                var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p> <button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>un-completed</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
+                var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>un-completed</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
                 $("#completedArea").append(ticket);
             }
         })
@@ -41,15 +41,18 @@ function newTicket() {
     var desc = $("#desc").val();
     var complete = "no";
     var working = "no";
+    var date = new Date();
+    var month = date.getMonth() + 1;
+    var time = date.getDate() + "/" + month + "/" + date.getFullYear();
     if (JSON.parse(localStorage.getItem('tickets')) === null){
         var id = 1;
-        var item = [id,title, desc,complete,working];
+        var item = [id,title, desc,complete,working,time];
         var ticketList = [item];
         localStorage.setItem('tickets',JSON.stringify(ticketList));
     } else {
         var ticketList = JSON.parse(localStorage.getItem('tickets'));
         var id = ticketList.length + 1;
-        var item = [id,title, desc,complete,working];
+        var item = [id,title, desc,complete,working,time];
         ticketList.push(item);
         localStorage.setItem('tickets',JSON.stringify(ticketList));
     }
