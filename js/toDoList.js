@@ -1,3 +1,4 @@
+//IDEA FOR CATEGORIES: EACH TICKET RENDERS WITH A DIV THAT HAS THE ID OF THE TICKET AS IT'S OWN ID. IT ALSO RENDERS WITH A BUTTON TO CREATE A "SUB" TICKET THAT PASSES IN THE ID OF THE DIV TO RENDER THE NEW "SUB" TICKET ONTO SO YOU CAN ADD MULTIPLE SUB TICKETS TO ONE MAIN TICKET
 $(document).ready(function () {
     renderTickets();
     if ($("#formArea").is(":visible")){
@@ -43,16 +44,16 @@ function newTicket() {
     var working = "no";
     var date = new Date();
     var month = date.getMonth() + 1;
-    var time = date.getDate() + "/" + month + "/" + date.getFullYear();
+    var dateShow = date.getDate() + "/" + month + "/" + date.getFullYear();
     if (JSON.parse(localStorage.getItem('tickets')) === null){
         var id = 1;
-        var item = [id,title, desc,complete,working,time];
+        var item = [id,title, desc,complete,working,dateShow];
         var ticketList = [item];
         localStorage.setItem('tickets',JSON.stringify(ticketList));
     } else {
         var ticketList = JSON.parse(localStorage.getItem('tickets'));
         var id = ticketList.length + 1;
-        var item = [id,title, desc,complete,working,time];
+        var item = [id,title, desc,complete,working,dateShow];
         ticketList.push(item);
         localStorage.setItem('tickets',JSON.stringify(ticketList));
     }
