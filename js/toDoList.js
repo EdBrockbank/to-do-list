@@ -164,12 +164,21 @@ function editCancel(ticketIndex) {
 }
 
 function removeTicket(id) {
+    var subTicketList = JSON.parse(localStorage.getItem('subTickets'));
+    if (subTicketList !== null) {
+        subTicketList.forEach(function (item) {
+            if (id === item[0]) {
+                subTicketList.splice(subTicketList.indexOf(item), 1);
+            }
+        });
+    }
     var ticketList = JSON.parse(localStorage.getItem('tickets'));
     ticketList.forEach(function (item) {
         if (id === item[0]){
             ticketList.splice(ticketList.indexOf(item),1);
-            localStorage.setItem('tickets',JSON.stringify(ticketList));
-            location.reload();
         }
-    })
+    });
+    localStorage.setItem('tickets',JSON.stringify(ticketList));
+    localStorage.setItem('subTickets',JSON.stringify(subTicketList));
+    location.reload();
 }
