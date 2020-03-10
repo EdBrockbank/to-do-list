@@ -1,6 +1,7 @@
 //IDEA FOR CATEGORIES: EACH TICKET RENDERS WITH A DIV THAT HAS THE ID OF THE TICKET AS IT'S OWN ID. IT ALSO RENDERS WITH A BUTTON TO CREATE A "SUB" TICKET THAT PASSES IN THE ID OF THE DIV TO RENDER THE NEW "SUB" TICKET ONTO SO YOU CAN ADD MULTIPLE SUB TICKETS TO ONE MAIN TICKET
 $(document).ready(function () {
     renderTickets();
+    renderSubTickets();
     if ($("#formArea").is(":visible")){
         $("#formArea").toggle();
     }
@@ -27,7 +28,7 @@ function renderTickets() {
                     var ticket = "<div class='ticket-working'><h3 class='title'>" + item[1] + " - Working</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) + ")'>Stopped working on it!</button> <button class='btn btn-primary' type='button' onclick='editTicket(" + tickets.indexOf(item) + ")'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
                     $("#ticketArea").append(ticket);
                 } else if (item[4] === "no"){
-                    var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) +")'>Working On It!</button> <button class='btn btn-primary' type='button' onclick='editTicket( " + tickets.indexOf(item) + " )'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
+                    var ticket = "<div class='ticket'><h3 class='title'>" + item[1] + "</h3><br><p class='desc'>" + item[2] + "</p> <br> <p>Created on: " + item[5] + "</p><div class='sub-tickets' id='" + item[0] +"'><button class='btn btn-primary' type='button' onclick='newSubTicket("+ item[0] +")'>New Sub Ticket</button> </div> <button class='btn btn-success' type='button' onclick='moveComplete(" + tickets.indexOf(item) + ")'>Completed</button> <button class='btn btn-warning' type='button' onclick='working(" + tickets.indexOf(item) +")'>Working On It!</button> <button class='btn btn-primary' type='button' onclick='editTicket( " + tickets.indexOf(item) + " )'>Edit ticket</button> <button class='btn btn-danger' type='button' onclick='removeTicket(" + item[0] + ")'>Remove</button> </div>";
                     $("#ticketArea").append(ticket);
                 }
             } else {
@@ -37,6 +38,17 @@ function renderTickets() {
         })
     }
 }
+
+function renderSubTickets() {
+    var subTickets = JSON.parse(localStorage.getItem('subTickets'));
+    if (subTickets !== null){
+        subTickets.forEach(function (item) {
+            var subTicket = "<h3 class='title'>"+ item[1] +"</h3><br><p class='desc'>"+ item[2] +"</p>";
+            $("#" + item[0]).append(subTicket);
+        })
+    }
+}
+
 function newTicket() {
     var title = $("#title").val();
     var desc = $("#desc").val();
@@ -60,6 +72,32 @@ function newTicket() {
     $("#cancel").remove();
     $("#formArea").toggle();
     $("#background").removeClass("grayout");
+    location.reload();
+}
+
+function newSubTicket(divID){
+    $("#background").addClass("grayout");
+    $("#formArea").toggle();
+    $("#submit").remove();
+    $("#form").append("<button id='sub-ticket-submit' class='btn btn-primary' type='button' onclick='createSubTicket("+ divID +")'>Save</button>");
+    $("#form").append("<button id='cancel' class='btn btn-danger' type='button' onclick='cancelNewTicket()'>Cancel</button>")
+}
+
+function createSubTicket(divID) {
+    console.log(divID);
+    var title = $("#title").val();
+    var desc = $("#desc").val();
+    var subTicket = [divID,title,desc];
+    if (JSON.parse(localStorage.getItem('subTickets')) === null){
+        var subTickets = [];
+        subTickets.push(subTicket);
+        localStorage.setItem('subTickets',JSON.stringify(subTickets))
+    } else {
+        subTickets = JSON.parse(localStorage.getItem('subTickets'));
+        subTickets.push(subTicket);
+        localStorage.setItem('subTickets',JSON.stringify(subTickets));
+    }
+    $("#formArea").toggle();
     location.reload();
 }
 
