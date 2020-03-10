@@ -4,14 +4,6 @@
     padding: 10px;
 }
 
-.title{
-
-}
-
-.desc{
-
-}
-
 .completedArea > .ticket{
     margin: 10px 0 10px 0;
     background-color: #7FCF67;
@@ -33,4 +25,10 @@
 
 .grayout{
     opacity: 0.4;
+}
+
+.sub-tickets{
+    margin: 10px;
+    padding: 10px;
+    background-color: #5a6268;
 }
